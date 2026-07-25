@@ -1,9 +1,9 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import QRCode from "react-qr-code";
 
 const SIZE = 220;
 const SPEED = 3;
-const SITE = "https://qr-ception.vercel.app"; // Update this to your NEW URL!
+const SITE = "https://qr-ception.vercel.app"; // Update to your URL
 
 const COLORS = [
   "#ff0055",
@@ -16,50 +16,6 @@ const COLORS = [
   "#00aaff",
 ];
 
-const MESSAGES = [
-  "You scanned it.",
-  "Again?",
-  "Still the same website.",
-  "I promise nothing changed.",
-  "This is becoming a habit.",
-  "You're committed.",
-  "Go on. Scan it again.",
-  "I'm not stopping you.",
-  "The QR is flattered.",
-  "Your camera app knows this website by heart.",
-  "One more won't hurt.",
-  "This is the loop now.",
-  "I respect the dedication.",
-  "You came back.",
-  "Interesting decision.",
-  "I would've stopped by now.",
-  "Apparently you wouldn't.",
-  "Still scanning?",
-  "Same QR. Different vibe.",
-  "You're farming absolutely nothing.",
-  "Achievement unlocked: No achievement.",
-  "This website has one job.",
-  "You keep helping it.",
-  "There's no ending.",
-  "There never was.",
-  "The QR believes in you.",
-  "Your phone saw this coming.",
-  "You chose this.",
-  "No one forced you.",
-  "Excellent use of modern technology.",
-];
-
-const SPECIAL = {
-  0: "Welcome! Scan the QR code to start the loop.",  // NEW: First visit message
-  1: "Welcome to the loop.",
-  5: "Five scans already?",
-  10: "Double digits already?",
-  25: "This is officially a hobby.",
-  42: "The answer was QR.",
-  69: "Nice.",
-  100: "You actually made it.",
-};
-
 const randomColor = () =>
   COLORS[Math.floor(Math.random() * COLORS.length)];
 
@@ -71,14 +27,7 @@ export default function App() {
 
   const nextURL = `${SITE}/?count=${count + 1}`;
 
-  const message = useMemo(() => {
-    return (
-      SPECIAL[count] ??
-      MESSAGES[Math.floor(Math.random() * MESSAGES.length)]
-    );
-  }, [count]);
-
-  const [color, setColor] = useState(randomColor()); // Changed to useState
+  const [color, setColor] = useState(randomColor());
 
   const pos = useRef({
     x: 100,
@@ -124,7 +73,7 @@ export default function App() {
       }
 
       if (bounced) {
-        setColor(randomColor()); // Changed to setColor
+        setColor(randomColor());
       }
 
       if (qrRef.current) {
@@ -142,20 +91,14 @@ export default function App() {
 
   return (
     <div style={styles.container}>
-      <div style={styles.message}>
-        {message}
-      </div>
-
       <div
         ref={qrRef}
-        style={{
-          ...styles.qr,
-        }}
+        style={styles.qr}
       >
         <QRCode
           value={nextURL}
           size={SIZE}
-          fgColor={color} // Changed from color.current
+          fgColor={color}
           bgColor="transparent"
         />
       </div>
@@ -169,19 +112,6 @@ const styles = {
     inset: 0,
     overflow: "hidden",
     background: "#000",
-    fontFamily: "'JetBrains Mono', monospace",
-  },
-
-  message: {
-    position: "absolute",
-    top: 20,
-    left: 0,
-    right: 0,
-    textAlign: "center",
-    color: "#fff",
-    fontSize: 15,
-    zIndex: 100,
-    pointerEvents: "none",
   },
 
   qr: {
