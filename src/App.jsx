@@ -3,7 +3,7 @@ import QRCode from "react-qr-code";
 
 const SIZE = 220;
 const SPEED = 3;
-const SITE = "https://https://qrception.vercel.app"; 
+const SITE = "https://qrception.vercel.app"; 
 
 const COLORS = [
   "#ff0055",
