@@ -2,21 +2,9 @@
 
 # qrception
 
-```text
-$ cat README
-
-There is a QR code.
-
-It knows where it's going.
-
-You don't.
-
-Scan it.
-
-Or don't.
-
-I'm not your mom.
-```
+<div align="center">
+  <img src="./terminal.png" width="800">
+</div>
 
 ### That's the README.
 
