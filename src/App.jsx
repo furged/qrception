@@ -1,9 +1,9 @@
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import QRCode from "react-qr-code";
 
 const SIZE = 220;
 const SPEED = 3;
-const SITE = "https://qrception.vercel.app/";
+const SITE = "https://qr-ception.vercel.app"; // Update this to your NEW URL!
 
 const COLORS = [
   "#ff0055",
@@ -50,6 +50,7 @@ const MESSAGES = [
 ];
 
 const SPECIAL = {
+  0: "Welcome! Scan the QR code to start the loop.",  // NEW: First visit message
   1: "Welcome to the loop.",
   5: "Five scans already?",
   10: "Double digits already?",
@@ -77,7 +78,7 @@ export default function App() {
     );
   }, [count]);
 
-  const color = useRef(randomColor());
+  const [color, setColor] = useState(randomColor()); // Changed to useState
 
   const pos = useRef({
     x: 100,
@@ -123,7 +124,7 @@ export default function App() {
       }
 
       if (bounced) {
-        color.current = randomColor();
+        setColor(randomColor()); // Changed to setColor
       }
 
       if (qrRef.current) {
@@ -154,7 +155,7 @@ export default function App() {
         <QRCode
           value={nextURL}
           size={SIZE}
-          fgColor={color.current}
+          fgColor={color} // Changed from color.current
           bgColor="transparent"
         />
       </div>
